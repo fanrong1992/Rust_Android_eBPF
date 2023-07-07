@@ -1,0 +1,22 @@
+[package]
+name = "kprobe-rs"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[target.'cfg(target_arch = "aarch64")'.dependencies]
+syscalls = { version = "*", default-features = false, features = ["aarch64"] }
+
+[dependencies]
+aya = { git = "https://github.com/aya-rs/aya", features = ["async_tokio"] }
+aya-log = { git = "https://github.com/aya-rs/aya" }
+kprobe-rs-common = { path = "../kprobe-rs-common" }
+anyhow = "1"
+env_logger = "0.10"
+libc = "0.2"
+log = "0.4"
+tokio = { version = "1.25", features = ["macros", "rt", "rt-multi-thread", "net", "signal"] }
+
+[[bin]]
+name = "kprobe-rs"
+path = "src/main.rs"
